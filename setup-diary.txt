@@ -1,4 +1,13 @@
-[Steps setup up hadoop cluster using Odroid XU4/XU3Lite]
+[Odroid hardware specific setup]
+* Power supply solution 
+	https://forum.odroid.com/viewtopic.php?f=139&t=22231
+	https://forum.odroid.com/viewtopic.php?f=95&t=28197
+	Another solution using ATX power supply http://mkaczanowski.com/building-arm-cluster-part-1-collecting-wiring-and-powering-devices/#power_supply
+	To turn on ATX solution, on the 24pin cord, connect green (POWER ON) with a ground (black) cord
+		https://makezine.com/projects/computer-power-supply-to-bench-power-supply-adapter/
+
+
+[Steps setup up hadoop cluster using Odroid XU4/XU3Lite boards]
 
 Overall instruction here: http://diybigdata.net/odroid-xu4-cluster/
 
@@ -6,10 +15,17 @@ Step done:
 
 1. Setup LAN cluster; Master node acts as a DHCP server; Ubuntu 16.06: 
 	http://diybigdata.net/2017/11/upgrading-odroid-cluster-to-ubuntu-16-04/
-	* boot.ini is editable when reading the EMMC module via SD card reader. There we can modify the ENV MAC address (of the eth0 ethernet interface)
-	* Note that all nodes must have unique mac addr, otherwise can't ssh between them
+	* Default username/password: root/odroid
+	* boot.ini is editable when reading the EMMC module via SD card reader. There we can modify the ENV MAC address (of the eth0 ethernet interface). Ubuntu image after flashed to EMMC card imprint the same ENV MAC on all boards. So after flashing OS image, we need to modify boot.ini and change ENV MAC addr . 
+	* All nodes must have unique mac addr, otherwise can't ssh between them
 	* /etc/hosts: Assign "127.0.0.1" only to "localhost". If assign it to "master/slavexx", then run into issue that slave cannot communicate with master
 	* on master /etc/dhcp/dhcpd.conf: master/dhcp server assigns static IP to slave nodes based on the slave's ethernet interface mac addr
+	* /etc/networking/interfaces template: https://www.cyberciti.biz/faq/setting-up-an-network-interfaces-file/
+	* To effectively make eth1 to be the preferred hdcp port, we have to explicitly distinguish eth0 and eth1 configs on the odroid board. Pretty much we need to follow "Configuring DHCP and NAT in ODROID XU4 Cluster" in http://diybigdata.net/2017/11/upgrading-odroid-cluster-to-ubuntu-16-04/:
+		- Clearly define /etc/udev/rules.d/70-persistent-net.rules for eth0 and eth1 for ensuring matching Mac addr to interfaces
+		- /etc/network/interfaces.d/eth*: make eth0 "iface eth0 inet manual", eth1 "iface eth1 inet dhcp"
+		- Then on the master node (also dhcp server), in /etc/dhcp/dhcpd.conf, assign IP address to the ethernet dongle on eth1 port of the slave
+	* Quick test network speed between 2 nodes: https://askubuntu.com/questions/7976/how-do-you-test-the-network-speed-between-two-boxes
 	
 2. Install hadoop on cluster
 	http://diybigdata.net/2016/06/installing-hadoop-onto-an-odroid-xu4-cluster/#starting-hdfs
@@ -18,12 +34,12 @@ Step done:
 		/etc/hosts
 		~/.bashrc
 		/opt/hadoop (hadoop installation)
-	* Quick test network speed between 2 nodes: https://askubuntu.com/questions/7976/how-do-you-test-the-network-speed-between-two-boxes
+	
 		
 		
 Next todo:
 1. Install and run Spark jobs
 2. Write real world map-reduce jobs
-3. Take a look into QFS (Quantcast File System)
+#3. Take a look into QFS (Quantcast File System)
 
 
