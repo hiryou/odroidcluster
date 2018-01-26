@@ -1,0 +1,13 @@
+127.0.0.1	localhost
+
+10.10.10.100	master
+10.10.10.1	slave1
+10.10.10.2	slave2
+10.10.10.3	slave3
+10.10.10.4	slave4
+
+::1		localhost ip6-localhost ip6-loopback
+ff02::1		ip6-allnodes
+ff02::2		ip6-allrouters
+
+

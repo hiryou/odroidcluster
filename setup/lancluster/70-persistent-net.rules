@@ -1,0 +1,2 @@
+SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="0a:0a:0a:0a:0a:0a", ATTR{dev_id}=="0x0", ATTR{type}=="1", NAME="eth0"
+SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="0a:0a:0a:0a:0a:0a", ATTR{dev_id}=="0x0", ATTR{type}=="1", NAME="eth1"

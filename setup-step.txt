@@ -1,0 +1,4 @@
+[1. DHCP Server - master node]
+- ssh to master node username/password: root/odroid
+- Run this script and follow instructions: master.sh
+
