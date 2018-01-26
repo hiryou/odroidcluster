@@ -1,13 +1,14 @@
 #!/bin/bash
 # Proper header for a Bash script.
 # Ref http://diybigdata.net/2017/11/upgrading-odroid-cluster-to-ubuntu-16-04/
+# Login as 'root' user
 
 # Fix perl complaining error of some missing locales. See https://gist.github.com/panchicore/1269109
-export LANGUAGE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+#export LANGUAGE=en_US.UTF-8
+#export LANG=en_US.UTF-8
+#export LC_ALL=en_US.UTF-8
 locale-gen en_US.UTF-8
-dpkg-reconfigure locales
+#dpkg-reconfigure locales
 
 # Create user 'odroid' in sudo group if not yet exists
 id -u odroid &>/dev/null || {
@@ -21,8 +22,8 @@ apt-get update
 apt-get upgrade
 apt autoremove
 
-#rm /var/lib/dpkg/lock    
-#rm /var/cache/apt/archives/lock
+rm /var/lib/dpkg/lock    
+rm /var/cache/apt/archives/lock
 
 # Switch to user 'odroid'
 #read -p "Switching to user 'odroid'..."
@@ -45,6 +46,10 @@ cat hosts > /etc/hosts
 # Append this to /etc/sysctl.conf
 read -p "[*] Writing to /etc/sysctl.conf..."
 cat sysctl.conf >> /etc/sysctl.conf
+
+# Log eth* MAC addr
+read -p "[*] Please log eth* MAC addr for later registering with master node for static IP assignment..."
+ifconfig -a
 
 # Done
 read -p "[*] Done. Now you can do: 'shutdown -h now'"

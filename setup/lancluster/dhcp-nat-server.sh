@@ -1,7 +1,7 @@
 #!/bin/bash
 # Proper header for a Bash script.
 # Ref http://diybigdata.net/2017/11/upgrading-odroid-cluster-to-ubuntu-16-04/
-# Login as 'odroid' user to 
+# Login as 'odroid' user
 
 # Disable Network Manager
 read -p "[*] Disabling NetworkManager.service..."
@@ -48,6 +48,8 @@ sudo nano /etc/dhcp/dhcpd.conf
 # DHCP config change: append this block to end of file
 read -p "[*] Appending host config to dhcpd.conf..."
 cat master-dhcpd.conf | sudo tee --append /etc/dhcp/dhcpd.conf > /dev/null
+read -p "[*] Modify dhcpd.conf as needed..."
+sudo nano /etc/dhcp/dhcpd.conf
 
 # Done
 read -p "[*] Done. Now you can do: 'shutdown -h now'"
