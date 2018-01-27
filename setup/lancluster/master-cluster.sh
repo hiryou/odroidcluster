@@ -2,20 +2,24 @@
 # Proper header for a Bash script.
 # Ref http://diybigdata.net/2017/11/upgrading-odroid-cluster-to-ubuntu-16-04/
 # Turn on the whole cluster; Login to master as 'odroid' user
+if [ $(whoami) != 'odroid' ]; then echo "Please run as 'odroid' user"; exit 1; fi
 
-read -p "[*] Test ping slave1..."
+read -p "[*] Please turn on the whole cluster [Enter] "
+read -p "[*] Confirm whole cluster was on? [Enter] "
+
+read -p "[*] Test ping slave1 [Enter] "
 ping slave1
-read -p "[*] Test ping slave2..."
+read -p "[*] Test ping slave2 [Enter] "
 ping slave2
-read -p "[*] Test ping slave3..."
+read -p "[*] Test ping slave3 [Enter] "
 ping slave3
-read -p "[*] Test ping slave4..."
+read -p "[*] Test ping slave4 [Enter] "
 ping slave4
 
-read -p "[*] Installing distributed SSH..."
+read -p "[*] Install distributed SSH [Enter] "
 sudo apt-get install pssh
 
-read -p "[*] Creating cluster manifest: all.txt, slaves.txt ..."
+read -p "[*] Create cluster manifest: all.txt, slaves.txt [Enter] "
 mkdir -p ~/cluster
 cat cluster-all.txt > ~/cluster/all.txt
 cat cluster-slaves.txt > ~/cluster/slaves.txt
@@ -24,7 +28,7 @@ if [ ! -f ~/.ssh/id_rsa ] || [ ! -f ~/.ssh/id_rsa.pub ]; then
 	read -p "[*] Creating SSH key..."
 	ssh-keygen -t rsa -P ""
 fi
-read -p "[*] Distributing single SSH key..."
+read -p "[*] Distributing single SSH key [Enter] "
 # As user 'root'
 ssh-copy-id root@master
 ssh-copy-id root@slave1
@@ -39,5 +43,5 @@ ssh-copy-id odroid@slave3
 ssh-copy-id odroid@slave4
 
 # Done
-read -p "[*] Done. Now you can do: 'shutdown -h now'"
+read -p "[*] DONE [Enter] "
 

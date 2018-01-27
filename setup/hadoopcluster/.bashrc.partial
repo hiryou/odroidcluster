@@ -1,0 +1,9 @@
+
+
+export JAVA_HOME=$(readlink -f /usr/bin/java | sed "s:bin/java::")..
+export PATH=$PATH:/usr/local/hadoop/sbin:/usr/local/hadoop/bin:${JAVA_HOME}/bin
+export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
+
+# HDFS print tree structure https://stackoverflow.com/questions/14515266/how-to-print-file-tree-with-hadoop
+
+
