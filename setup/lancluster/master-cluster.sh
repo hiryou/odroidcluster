@@ -4,6 +4,9 @@
 # Turn on the whole cluster; Login to master as 'odroid' user
 if [ $(whoami) != 'odroid' ]; then echo "Please run as 'odroid' user"; exit 1; fi
 
+# Fix perl complaining error of some missing locales. See https://gist.github.com/panchicore/1269109
+sudo locale-gen en_US.UTF-8
+
 read -p "[*] Please turn on the whole cluster [Enter] "
 read -p "[*] Confirm whole cluster was on? [Enter] "
 

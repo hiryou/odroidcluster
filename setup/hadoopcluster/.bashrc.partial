@@ -6,4 +6,9 @@ export HADOOP_CLASSPATH=${JAVA_HOME}/lib/tools.jar
 
 # HDFS print tree structure https://stackoverflow.com/questions/14515266/how-to-print-file-tree-with-hadoop
 
-
+# Custom aliases https://stackoverflow.com/questions/756756/multiple-commands-in-an-alias-for-bash
+if [ $(hostname) = 'master' ]; then
+	alias hadoop-start='start-dfs.sh; start-yarn.sh; '
+	alias hadoop-stop='stop-dfs.sh; stop-yarn.sh; '
+	alias hadoop-jps='jps'
+fi

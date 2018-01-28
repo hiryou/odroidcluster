@@ -4,6 +4,9 @@
 # Login as 'odroid' user
 if [ $(whoami) != 'odroid' ]; then echo "Please run as 'odroid' user"; exit 1; fi
 
+# Fix perl complaining error of some missing locales. See https://gist.github.com/panchicore/1269109
+sudo locale-gen en_US.UTF-8
+
 # Disable Network Manager
 read -p "[*] Disable NetworkManager.service [Enter] "
 sudo systemctl disable NetworkManager.service

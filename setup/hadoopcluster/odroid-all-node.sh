@@ -10,7 +10,7 @@ sudo locale-gen en_US.UTF-8
 # Source https://www.digitalocean.com/community/tutorials/how-to-install-java-with-apt-get-on-ubuntu-16-04
 java -version
 if [ $? -ne 0 ]; then 
-	read -p "[*] Installing JDK 8 now..."
+	read -p "[*] Installing JDK 8 now [Enter] "
 	sudo add-apt-repository ppa:webupd8team/java
 	sudo apt-get update
 	sudo apt-get install oracle-java8-installer
@@ -18,7 +18,7 @@ fi
 
 # Create hadoop user/group
 id -u hadoop &>/dev/null || {
-	read -p "[*] Adding group:hadoop, user:hduser (password:hduser)..."
+	read -p "[*] Adding group:hadoop, user:hduser (password:hduser) [Enter] "
 	sudo addgroup hadoop
 	sudo adduser --ingroup hadoop hduser
 	sudo adduser hduser sudo
@@ -26,6 +26,6 @@ id -u hadoop &>/dev/null || {
 }
 
 # Done
-read -p "[*] Done. Press any key to exit..."
+read -p "[*] Done [Enter] "
 exit 0
 

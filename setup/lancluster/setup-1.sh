@@ -13,8 +13,6 @@ if [ $(hostname) = 'master' ]; then
 	sudo -H -u odroid bash -c 'bash dhcp-nat-server.sh' 
 fi
 
-if [ $(hostname) = 'master' ]; then 
-	read -p "[**] Run setup: master-cluster.sh [Enter] "
-	sudo -H -u odroid bash -c 'bash master-cluster.sh' 
-fi
+read -p "[**] Now shutdown this node [Enter] "
+sudo shutdown -h now
 

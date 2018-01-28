@@ -8,25 +8,31 @@ if [ $(hostname) != 'master' ]; then echo "Please run this on 'master' node only
 # Fix perl complaining error of some missing locales. See https://gist.github.com/panchicore/1269109
 sudo locale-gen en_US.UTF-8
 
-read -p "[*] Creating and distributing ssh key..."
-ssh-keygen -t rsa -P ""
+if [ ! -f ~/.ssh/id_rsa ] || [ ! -f ~/.ssh/id_rsa.pub ]; then 
+	read -p "[*] Generating ssh key [Enter] "
+	ssh-keygen -t rsa -P ""
+fi
+read -p "[*] Distributing ssh key [Enter] "
 # for master
-cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
-ssh hduser@localhost exit
-# and all slaves
+#cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
+#ssh hduser@localhost exit
+# for master and all slaves
+ssh-copy-id hduser@master
 ssh-copy-id hduser@slave1
 ssh-copy-id hduser@slave2
 ssh-copy-id hduser@slave3
 ssh-copy-id hduser@slave4
+ssh hduser@localhost exit
+ssh hduser@master exit
 ssh hduser@slave1 exit
 ssh hduser@slave2 exit
 ssh hduser@slave3 exit
 ssh hduser@slave4 exit
 
-read -p "[*] Formatting namenode..."
-hdfs namenode -format
+read -p "[*] Formatting namenode [Enter] "
+sudo -H -u hduser bash -c 'hdfs namenode -format' 
 
 # DONE
-read -p "[*] Done. Press any key to exit..."
+read -p "[*] Done. Press any key to exit [Enter] "
 exit 0
 
