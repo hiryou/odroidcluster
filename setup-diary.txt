@@ -38,8 +38,7 @@ Step done:
 		
 		
 Next todo:
-1. Install and run Spark jobs
-2. Write real world map-reduce jobs
-#3. Take a look into QFS (Quantcast File System)
+1. Run some Spark jobs
+2. Streamline the process to natively build any hadoop version on ARM
 
 

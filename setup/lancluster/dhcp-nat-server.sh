@@ -2,6 +2,7 @@
 # Proper header for a Bash script.
 # Ref http://diybigdata.net/2017/11/upgrading-odroid-cluster-to-ubuntu-16-04/
 # Login as 'odroid' user
+if [ $(hostname) != 'master' ]; then echo "Please run this on 'master' node only"; exit 1; fi
 if [ $(whoami) != 'odroid' ]; then echo "Please run as 'odroid' user"; exit 1; fi
 
 # Fix perl complaining error of some missing locales. See https://gist.github.com/panchicore/1269109
