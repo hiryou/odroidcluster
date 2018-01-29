@@ -13,7 +13,7 @@ Overall instruction here: http://diybigdata.net/odroid-xu4-cluster/
 
 Step done: 
 
-1. Setup LAN cluster; Master node acts as a DHCP server; Ubuntu 16.06: 
+1. Setup LAN network; Master node acts as a DHCP server; Ubuntu 16.06: 
 	http://diybigdata.net/2017/11/upgrading-odroid-cluster-to-ubuntu-16-04/
 	* Default username/password: root/odroid
 	* boot.ini is editable when reading the EMMC module via SD card reader. There we can modify the ENV MAC address (of the eth0 ethernet interface). Ubuntu image after flashed to EMMC card imprint the same ENV MAC on all boards. So after flashing OS image, we need to modify boot.ini and change ENV MAC addr . 
@@ -38,6 +38,10 @@ Step done:
 3. Install spark on cluster
 	http://diybigdata.net/2016/07/installing-spark-onto-odroid-xu4-cluster/#run-word-count
 	* Do not elect 'localhost' (master node) as a slave, otherwise there will be lots of executor timeout during any job run
+	
+4. Cassandra / HBase
+	* Cassandra on cluster https://www.digitalocean.com/community/tutorials/how-to-run-a-multi-node-cluster-database-with-cassandra-on-ubuntu-14-04
+	* HBase on cluster http://hbase.apache.org/0.94/book/standalone_dist.html
 	
 		
 		

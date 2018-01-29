@@ -42,4 +42,3 @@ sudo runuser -l hduser -c "hadoop version"
 # DONE
 read -p "[*] Done. Press any key to exit [Enter] "
 exit 0
-
