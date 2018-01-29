@@ -1,12 +1,10 @@
 
-
 PYSPARK_PYTHON=python3
 PYTHONHASHSEED=12121969
 SPARK_DIST_CLASSPATH=$(/usr/local/hadoop/bin/hadoop classpath)
 HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 SPARK_LOCAL_DIRS=/home/hduser/spark
-SPARK_WORKER_MEMORY=1400M
-SPARK_WORKER_CORES=4
-SPARK_DAEMON_JAVA_OPTS="-Dspark.worker.timeout=800 -Dspark.akka.timeout=300 -Dspark.shuffle.consolidateFiles=true"
-SPARK_JAVA_OPTS="-Dspark.worker.timeout=800 -Dspark.akka.timeout=300 -Dspark.shuffle.consolidateFiles=true"
-
+SPARK_WORKER_MEMORY=1300M
+SPARK_WORKER_CORES=3
+SPARK_DAEMON_JAVA_OPTS="-Dspark.worker.timeout=600 -Dspark.akka.timeout=200 -Dspark.shuffle.consolidateFiles=true"
+SPARK_JAVA_OPTS="-Dspark.worker.timeout=600 -Dspark.akka.timeout=200 -Dspark.shuffle.consolidateFiles=true"

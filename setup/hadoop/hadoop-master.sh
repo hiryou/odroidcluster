@@ -12,25 +12,29 @@ if [ ! -f ~/.ssh/id_rsa ] || [ ! -f ~/.ssh/id_rsa.pub ]; then
 	read -p "[*] Generating ssh key [Enter] "
 	ssh-keygen -t rsa -P ""
 fi
-read -p "[*] Distributing ssh key [Enter] "
+read -p "[*] Establishing trusted host and distributing single SSH key [Enter] "
 # for master
 #cat $HOME/.ssh/id_rsa.pub >> $HOME/.ssh/authorized_keys
 #ssh hduser@localhost exit
+# Add all slaves as trusted hosts with master
+#for slave in `cat hadoop-conf/slaves`; do ssh-keygen -f "$HOME/.ssh/known_hosts" -R $slave done
 # for master and all slaves
-ssh-copy-id hduser@master
-ssh-copy-id hduser@slave1
-ssh-copy-id hduser@slave2
-ssh-copy-id hduser@slave3
-ssh-copy-id hduser@slave4
-ssh hduser@localhost exit
-ssh hduser@master exit
-ssh hduser@slave1 exit
-ssh hduser@slave2 exit
-ssh hduser@slave3 exit
-ssh hduser@slave4 exit
+for host in `cat hadoop-conf/slaves`; do 
+	ssh-copy-id hduser@$host
+	ssh hduser@$host exit
+done
 
-read -p "[*] Formatting namenode [Enter] "
-sudo -H -u hduser bash -c 'hdfs namenode -format' 
+
+while true; do
+    read -p "[*] Format namenode? [y/n] " yn
+    case $yn in
+        [Yy]* ) 
+        	sudo -H -u hduser bash -c 'hdfs namenode -format' 
+        	break;;
+        [Nn]* ) break;;
+        * ) ;;
+    esac
+done
 
 # DONE
 read -p "[*] Done. Press any key to exit [Enter] "

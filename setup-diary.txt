@@ -34,6 +34,10 @@ Step done:
 		/etc/hosts
 		~/.bashrc
 		/opt/hadoop (hadoop installation)
+		
+3. Install spark on cluster
+	http://diybigdata.net/2016/07/installing-spark-onto-odroid-xu4-cluster/#run-word-count
+	* Do not elect 'localhost' (master node) as a slave, otherwise there will be lots of executor timeout during any job run
 	
 		
 		

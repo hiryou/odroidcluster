@@ -5,7 +5,9 @@ if [ $(hostname) = 'master' ]; then
                 /usr/local/spark/sbin/start-all.sh 
         }
         alias spark-stop='/usr/local/spark/sbin/stop-all.sh; /usr/local/hadoop/sbin/stop-dfs.sh; '
-	alias spark-pyspark-start='XDG_RUNTIME_DIR="/home/hduser/jupyter" PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS="notebook --no-browser --ip=192.168.0.21 --port=7777 --notebook-$
+	
+	alias spark-jupyter-start='XDG_RUNTIME_DIR="/home/hduser/jupyter" PYSPARK_DRIVER_PYTHON=jupyter PYSPARK_DRIVER_PYTHON_OPTS="notebook --no-browser --ip=192.168.0.21 --port=7777 --notebook-dir=/home/hduser/notebooks" /usr/local/spark/bin/pyspark --packages com.databricks:spark-csv_2.10:1.1.0 --master spark://master:7077 > /dev/null &'
+	alias spark-jupyter-stop="kill $(ps aux | grep '/usr/local/bin/[j]upyter-notebook' | awk '{print $2}')"
 
         cluster-sync-sparkconfigs() {
                 for host in `cat /home/odroid/cluster/slaves.txt`; do

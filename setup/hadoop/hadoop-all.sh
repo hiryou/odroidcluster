@@ -27,6 +27,9 @@ sudo cp -f hadoop-conf/core-site.xml /opt/hadoop-2.7.2/etc/hadoop/
 sudo cp -f hadoop-conf/hdfs-site.xml /opt/hadoop-2.7.2/etc/hadoop/
 sudo cp -f hadoop-conf/mapred-site.xml /opt/hadoop-2.7.2/etc/hadoop/
 sudo cp -f hadoop-conf/yarn-site.xml /opt/hadoop-2.7.2/etc/hadoop/
+# configs for masters and slaves
+sudo cp -f hadoop-conf/masters /opt/hadoop-2.7.2/etc/hadoop/
+sudo cp -f hadoop-conf/slaves /opt/hadoop-2.7.2/etc/hadoop/
 
 read -p "[*] Appending content to .bashrc [Enter] "
 cat bashrc.partial >> $HOME/.bashrc

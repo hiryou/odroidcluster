@@ -13,6 +13,6 @@ if [ $(hostname) = 'master' ]; then
 	sudo -H -u odroid bash -c 'bash lan-dhcp-server.sh' 
 fi
 
-read -p "[**] Now shutdown this node [Enter] "
-sudo shutdown -h now
+read -p "[**] Now restart this node. Log back in and run setup-2.sh [Enter] "
+sudo shutdown -r now
 

@@ -12,9 +12,17 @@ sudo mkdir -p /home/hduser/jupyter
 sudo chown -R hduser:hadoop /home/hduser/jupyter
 mkdir $HOME/notebooks
 
-read -p "[*] Appending content to .bashrc [Enter] "
-cat bashrc.partial >> $HOME/.bashrc
-source ~/.bashrc 
+while true; do
+    read -p "[*] Append useful commands to .bashrc? [Enter] " yn
+    case $yn in
+        [Yy]* ) 
+        	cat bashrc.partial >> $HOME/.bashrc
+			source ~/.bashrc 
+        	break;;
+        [Nn]* ) break;;
+        * ) ;;
+    esac
+done
 
 read -p "[*] Install jupyter [Enter] "
 sudo apt-get install python3-pip
@@ -24,6 +32,10 @@ sudo pip3 install jupyter
 read -p "[*] Install matplotlib [Enter] "
 sudo apt-get build-dep matplotlib
 sudo pip3 install matplotlib
+
+#read -p "[*] Create log folder for pyspark: /var/log/pyspark [Enter] "
+#sudo mkdir -p /var/log/pyspark
+#sudo chown -R hduser:hadoop /var/log/pyspark
 
 
 # Done

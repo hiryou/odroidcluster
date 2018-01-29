@@ -1,5 +1,4 @@
 
-
 spark.master			spark://master:7077
 spark.serializer		org.apache.spark.serializer.KryoSerializer
 spark.executor.memory		1000M
@@ -7,4 +6,4 @@ spark.driver.memory		1000M
 spark.io.compression.codec	lz4
 spark.driver.cores		2
 spark.executor.cores		2
-
+spark.network.timeout           120

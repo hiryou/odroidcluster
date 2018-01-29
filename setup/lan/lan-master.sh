@@ -8,17 +8,13 @@ if [ $(whoami) != 'odroid' ]; then echo "Please run as 'odroid' user"; exit 1; f
 # Fix perl complaining error of some missing locales. See https://gist.github.com/panchicore/1269109
 sudo locale-gen en_US.UTF-8
 
-read -p "[*] Please turn on the whole cluster [Enter] "
+read -p "[*] Please restart/turn on the whole cluster [Enter] "
 read -p "[*] Confirm whole cluster was on? [Enter] "
 
-read -p "[*] Test ping slave1 [Enter] "
-ping slave1
-read -p "[*] Test ping slave2 [Enter] "
-ping slave2
-read -p "[*] Test ping slave3 [Enter] "
-ping slave3
-read -p "[*] Test ping slave4 [Enter] "
-ping slave4
+for slave in `cat cluster-slaves.txt`; do 
+	read -p "[*] Test ping $slave [Enter] "
+	timeout 4 ping $slave; 
+done
 
 read -p "[*] Install distributed SSH [Enter] "
 sudo apt-get install pssh
@@ -29,26 +25,32 @@ cat cluster-all.txt > ~/cluster/all.txt
 cat cluster-slaves.txt > ~/cluster/slaves.txt
 
 if [ ! -f ~/.ssh/id_rsa ] || [ ! -f ~/.ssh/id_rsa.pub ]; then 
-	read -p "[*] Creating SSH key..."
+	read -p "[*] Creating no-password SSH key..."
 	ssh-keygen -t rsa -P ""
 fi
-read -p "[*] Distributing single SSH key [Enter] "
-# As user 'root'
-ssh-copy-id root@master
-ssh-copy-id root@slave1
-ssh-copy-id root@slave2
-ssh-copy-id root@slave3
-ssh-copy-id root@slave4
-# As user 'odroid'
-ssh-copy-id odroid@master
-ssh-copy-id odroid@slave1
-ssh-copy-id odroid@slave2
-ssh-copy-id odroid@slave3
-ssh-copy-id odroid@slave4
+read -p "[*] Establishing trusted host and distributing single SSH key [Enter] "
+for host in `cat cluster-all.txt`; do 
+	# copy single ssh key to all nodes
+	ssh-copy-id root@$host
+	ssh-copy-id odroid@$host
+	# login to establish trusted host
+	ssh root@$host exit
+	ssh odroid@$host exit
+done
+# Add all slaves as trusted hosts with master
+#for slave in `cat cluster-slaves.txt`; do ssh-keygen -f "$HOME/.ssh/known_hosts" -R $slave done
 
-read -p "[*] Appending useful commands to .bashrc [Enter] "
-cat bashrc.partial >> $HOME/.bashrc
-source ~/.bashrc 
+while true; do
+    read -p "[*] Append useful commands to .bashrc? [y/n] " yn
+    case $yn in
+        [Yy]* ) 
+        	cat bashrc.partial >> $HOME/.bashrc
+			source ~/.bashrc 
+        	break;;
+        [Nn]* ) break;;
+        * ) ;;
+    esac
+done
 
 # Done
 read -p "[*] DONE [Enter] "
