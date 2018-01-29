@@ -13,7 +13,7 @@ sudo chown -R hduser:hadoop /home/hduser/jupyter
 mkdir $HOME/notebooks
 
 read -p "[*] Appending content to .bashrc [Enter] "
-cat .bashrc.partial >> $HOME/.bashrc
+cat bashrc.partial >> $HOME/.bashrc
 source ~/.bashrc 
 
 read -p "[*] Install jupyter [Enter] "

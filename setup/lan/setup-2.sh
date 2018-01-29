@@ -6,7 +6,7 @@
 sudo locale-gen en_US.UTF-8
 
 if [ $(hostname) = 'master' ]; then 
-	read -p "[**] Run setup: master-cluster.sh [Enter] "
-	sudo -H -u odroid bash -c 'bash master-cluster.sh' 
+	read -p "[**] Run setup: Master node [Enter] "
+	sudo -H -u odroid bash -c 'bash lan-master.sh' 
 fi
 

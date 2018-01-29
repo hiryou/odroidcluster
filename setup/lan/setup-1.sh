@@ -5,12 +5,12 @@
 # Fix perl complaining error of some missing locales. See https://gist.github.com/panchicore/1269109
 sudo locale-gen en_US.UTF-8
 
-read -p "[**] Run setup: all-node.sh [Enter] "
-sudo -H -u root bash -c 'bash all-node.sh' 
+read -p "[**] Run setup: Initial setup for all nodes [Enter] "
+sudo -H -u root bash -c 'bash lan-all.sh' 
 
 if [ $(hostname) = 'master' ]; then 
-	read -p "[**] Run setup: dhcp-nat-server.sh [Enter] "
-	sudo -H -u odroid bash -c 'bash dhcp-nat-server.sh' 
+	read -p "[**] Run setup: DHCP authoritative server [Enter] "
+	sudo -H -u odroid bash -c 'bash lan-dhcp-server.sh' 
 fi
 
 read -p "[**] Now shutdown this node [Enter] "

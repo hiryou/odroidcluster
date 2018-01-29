@@ -47,7 +47,7 @@ ssh-copy-id odroid@slave3
 ssh-copy-id odroid@slave4
 
 read -p "[*] Appending useful commands to .bashrc [Enter] "
-cat .bashrc.partial >> $HOME/.bashrc
+cat bashrc.partial >> $HOME/.bashrc
 source ~/.bashrc 
 
 # Done
