@@ -99,6 +99,10 @@ cluster-sync-hadoopconfigs		# Sync hadoop configs from master to all slaves
 cluster-sync-sparkconfigs		# Sync spark configs from master to all slaves
 ```
 
+## Benchmarks
+* [TODO] Checkout hadoop default benchmark suites
+* [Recommended] terasort 10Gb - 100Gb  
+
 ## Sample hadoop job run
 
 ## Sample spark job run
