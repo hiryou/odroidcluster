@@ -5,9 +5,32 @@ Project odroid cluster (xu3lite and xu4) as headless distributed system
 - hadoop/spark cluster
 - more to come..
 
-## Prerequisites
-- Each Odroid board is preloaded with ubuntu 16.04 (as of this writing)
-- Each Odroid turns on successfully with default username/password = root/odroid
+## Install ubuntu 16.04
+Download img.xz from [here](https://odroid.in/ubuntu_16.04lts/). Use minimal for headless server
+
+Obtain list of current mounting devices
+```bash
+diskutil list
+```
+
+Uncompress xz to img
+```bash
+$ xz -d /path/to/ubuntu-image.xz
+# this will generate ubuntu-image.img
+```
+
+Plug eMMC module to eMMC reader, then eMMC reader to SSD card reader -> computer
+diskutil check again to obtain the correct path to eMMC module
+```bash
+diskutil list
+```
+
+Now unmount eMMC path, and flash it
+```bash
+diskutil unmountdisk /dev/diskX
+sudo dd of=/dev/diskX bs=1m if=/path/to/ubuntu-image.img
+# waiting..
+```
 
 ## Setup Cluster
 
