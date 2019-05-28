@@ -32,6 +32,13 @@ sudo dd of=/dev/diskX bs=1m if=/path/to/ubuntu-image.img
 # waiting..
 ```
 
+Once done, remember to unmount it
+```bash
+diskutil unmountdisk /dev/diskX
+```
+
+Now you can plug it to the droid
+
 ## Setup Cluster
 
 - This instruction will guide you through setting up LAN network, hadoop, spark with jupyter notebook
@@ -50,23 +57,22 @@ chmod +x *.sh
 
 ### 1. Setup LAN network
 
-Initial setup for all nodes
+Initial setup for each node, one at a time. Do all slave nodes first, then master node:
 ```
 cd ./setup/lan
-chmod +x *.sh
-./setup-1.sh
+./setup-node.sh
 # Follow instructions
-# Once this setup is done for all nodes, the whole cluster should have been shutdown
+# Once this setup is done, all nodes should have been shutdown
 ```
-Now turn on the whole cluster and ssh to master node
+Now turn on the whole cluster and ssh to master node (connected through USB 3.0 ethernet dongle)
 ```
 cd ./setup/lan
-./setup-2.sh
+./setup-master.sh
 ```
 
 ### 2. Setup hadoop
 
-Go to each node to run the setup scripts
+Go to each node to run the setup scripts. Do all slave nodes first, then master node:
 ```
 cd ./setup/hadoop
 chmod +x *.sh

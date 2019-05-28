@@ -1,7 +1,7 @@
 #!/bin/bash
 # Proper header for a Bash script.
 # Ref http://diybigdata.net/2017/11/upgrading-odroid-cluster-to-ubuntu-16-04/
-if [ $(whoami) != 'hduser' ]; then echo "Please run as 'hduser' user"; exit 1; fi
+if [[ $(whoami) != 'hduser' ]]; then echo "Please run as 'hduser' user"; exit 1; fi
 
 # Dir of this executing script
 #DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

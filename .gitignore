@@ -3,3 +3,5 @@
 
 .DS_Store
 **/hadoop-arm-preconfigured.tar.gz
+
+setup/minicom.cap

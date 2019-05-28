@@ -1,7 +1,7 @@
 #!/bin/bash
 # Proper header for a Bash script.
 # Ref http://diybigdata.net/2016/07/installing-spark-onto-odroid-xu4-cluster/
-if [ $(whoami) != 'odroid' ]; then echo "Please run as 'odroid' user"; exit 1; fi
+if [[ $(whoami) != 'odroid' ]]; then echo "Please run as 'odroid' user"; exit 1; fi
 
 # Fix perl complaining error of some missing locales. See https://gist.github.com/panchicore/1269109
 sudo locale-gen en_US.UTF-8
@@ -14,7 +14,7 @@ read -p "[*] Install python3 [Enter] "
 sudo apt-get install python3
 
 read -p "[*] Install spark software under /opt/ [Enter] "
-if [ ! -f $HOME/spark-2.1.0-bin-hadoop2.7-double-alignment.tgz ]; then
+if [[ ! -f $HOME/spark-2.1.0-bin-hadoop2.7-double-alignment.tgz ]]; then
 	sudo wget http://diybigdata.net/downloads/spark/spark-2.1.0-bin-hadoop2.7-double-alignment.tgz -P $HOME/
 fi
 sudo tar xvzf $HOME/spark-2.1.0-bin-hadoop2.7-double-alignment.tgz -C /opt/

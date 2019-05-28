@@ -12,7 +12,7 @@ read -p "[**] Run setup: All nodes [Enter] "
 sudo -H -u hduser bash -c 'bash hadoop-all.sh' 
 #sudo runuser -l hduser -c "bash $DIR/hduser-all-node.sh"
 
-if [ $(hostname) = 'master' ]; then 
+if [[ $(hostname) = 'master' ]]; then
 	read -p "[**] Run setup: Master node [Enter] "
 	sudo -H -u hduser bash -c 'bash hadoop-master.sh' 
 fi

@@ -5,8 +5,8 @@
 # Fix perl complaining error of some missing locales. See https://gist.github.com/panchicore/1269109
 sudo locale-gen en_US.UTF-8
 
-if [ $(hostname) = 'master' ]; then 
-	read -p "[**] Run setup: Master node [Enter] "
+if [[ $(hostname) = 'master' ]]; then
+	echo "[**] Running setup: Master node.. "
 	sudo -H -u odroid bash -c 'bash lan-master.sh' 
 fi
 

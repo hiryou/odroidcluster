@@ -1,19 +1,20 @@
-
+# partial bashrc - initial setup
 if [ $(hostname) = 'master' ]; then
-        cluster-restart() {
-                #sudo echo "Preparing to restart cluster.."
-                parallel-ssh -i -h ~/cluster/slaves.txt -l root "sudo shutdown -r now"
-                #parallel-ssh -i -h ~/cluster/slaves.txt -l root "sudo echo something"
-                sudo shutdown -r now
-        }
+    cluster-restart() {
+            #sudo echo "Preparing to restart cluster.."
+            parallel-ssh -i -h ~/cluster/slaves.txt -l root "sudo shutdown -r now"
+            #parallel-ssh -i -h ~/cluster/slaves.txt -l root "sudo echo something"
+            sudo shutdown -r now
+    }
+
 	cluster-shutdown() {
                 #sudo echo "Preparing to shutdown cluster.."
                 parallel-ssh -i -h ~/cluster/slaves.txt -l root "sudo shutdown -h now"
                 #parallel-ssh -i -h ~/cluster/slaves.txt -l root "sudo echo something"
                 sudo shutdown -h now
-        }
-        
-        cluster-ping() {
-                for host in `cat ~/cluster/all.txt`; do timeout 4 ping $host; done
-        }
+    }
+
+    cluster-ping() {
+            for host in `cat ~/cluster/all.txt`; do timeout 4 ping $host; done
+    }
 fi

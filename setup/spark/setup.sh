@@ -8,7 +8,7 @@ sudo locale-gen en_US.UTF-8
 read -p "[**] Run setup: All nodes [Enter] "
 sudo -H -u odroid bash -c 'bash spark-all.sh' 
 
-if [ $(hostname) = 'master' ]; then 
+if [[ $(hostname) = 'master' ]]; then
 	read -p "[**] Run setup: Master node [Enter] "
 	sudo -H -u hduser bash -c 'bash spark-master.sh' 
 fi
